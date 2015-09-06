@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta charset="UTF-8">
+    <title>Horario</title>
+    <script src="components/bower_components/webcomponentsjs/webcomponents.js">
+    </script>
+    <script src="app.js"></script>
+    
+    <link rel="import" href="components/bower_components/polymer/polymer.html">
+    <link rel="import" href="components/bower_components/paper-toolbar/paper-toolbar.html">
+    <link rel="import" href="components/bower_components/paper-icon-button/paper-icon-button.html">
+    <link rel="import" href="components/bower_components/iron-icons/iron-icons.html">
+    <link rel="import" href="components/bower_components/paper-drawer-panel/paper-drawer-panel.html">
+    <link rel="import" href="components/bower_components/paper-fab/paper-fab.html">
+    <link rel="import" href="components/bower_components/paper-styles/paper-styles.html">
+    <link rel="import" href="components/bower_components/paper-menu/paper-menu.html">
+    <link rel="import" href="components/bower_components/paper-menu/paper-submenu.html">
+    <link rel="import" href="components/bower_components/paper-item/paper-item.html">
+    <link rel="import" href="components/bower_components/iron-collapse/iron-collapse.html">
+    <link rel="import" href="components/bower_components/iron-pages/iron-pages.html">
+    <link rel="import" href="components/bower_components/paper-header-panel/paper-header-panel.html">
+    <link rel="import" href="components/bower_components/iron-list/iron-list.html">
+    <link rel="import" href="components/bower_components/iron-flex-layout/iron-flex-layout.html">
+    
+    <style is="custom-style">
+        body{
+            width: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        paper-toolbar.main{
+            background-color: var(--paper-blue-500);
+        }
+        paper-toolbar.lunes{
+            background-color: var(--paper-blue-500);
+        }
+        paper-toolbar.drawer{
+            background-color: var(--paper-blue-100);
+        }
+        .horizontal-section {
+      padding: 0 !important;
+    }
+       
+        paper-item {
+      --paper-item: {
+        cursor: pointer;
+      };
+    }
+
+    .sublist {
+      padding-left: 20px;
+      padding-right: 20px;
+
+    }
+        
+    paper-scroll-header-panel {
+      @apply(--layout-fit);
+      @apply(--layout-vertical);
+      @apply(--paper-font-common-base);
+    }
+
+
+    iron-list {
+      background-color: var(--paper-grey-200, #eee);
+      padding-bottom: 16px;
+        height: 600px;
+    
+       
+    }
+
+    .item1 {
+        width: 50%;
+        height: 90px;
+     margin-top: 70px;
+        padding-top: 20px;
+      border-radius: 8px;
+      background-color: white;
+      border: 1px solid #ddd;
+    }
+        .item2 {
+            width: 50%;
+            height: 90px;
+            margin-top: 170px;
+            padding-top: 20px;
+            border-radius: 8px;
+            background-color: white;
+            border: 1px solid #ddd;
+    }
+        .item3 {
+            width: 100%;
+            height: 90px;
+            margin-top: 270px;
+            padding-top: 20px;
+            border-radius: 8px;
+            background-color: white;
+            border: 1px solid #ddd;
+    }
+        .item4 {
+            width: 100%;
+            height: 90px;
+            margin-top: 370px;
+            padding-top: 20px;
+            border-radius: 8px;
+            background-color: white;
+            border: 1px solid #ddd;
+    }
+        .item5 {
+            width: 100%;
+            height: 90px;
+            margin-top: 470px;
+            padding-top: 20px;
+            border-radius: 8px;
+            background-color: white;
+            border: 1px solid #ddd;
+    }
+
+    .pad {
+      padding: 0 16px;
+     
+    }
+
+    .primary {
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .secondary {
+      font-size: 14px;
+    }
+
+    .dim {
+      color: gray;
+    }
+       
+        
+    </style>
+
+</head>
+<body unresolved class="fullbleed layout vertical">
+<span id="browser-sync-binding"></span>
+   <template is="dom-bind" id="app">
+       <paper-drawer-panel id="paperDrawerPanel">
+       <paper-scroll-header-panel class="fit" drawer fixed condenses keep-condensed-header>
+             <paper-toolbar class= "drawer tall">
+            
+              <span flex class="title">Emmanuel</span>               
+              </paper-toolbar>
+              <paper-menu>
+              <paper-submenu>
+              <paper-item class="menu-trigger">Semana</paper-item>
+              <paper-menu selected="{{page}}" attr-for-selected="data-category" class="menu-content sublist">
+              <paper-item on-click="onDataRouteClick" data-category="Lunes">Lunes</paper-item>
+              <paper-item on-click="onDataRouteClick" data-category="Martes">Martes</paper-item>
+              <paper-item on-click="onDataRouteClick" data-category="Miercoles">Miercoles</paper-item>
+              <paper-item on-click="onDataRouteClick" data-category="Jueves">Jueves</paper-item>
+              <paper-item on-click="onDataRouteClick" data-category="Viernes">Viernes</paper-item>
+              </paper-menu>
+              </paper-submenu>                       
+              </paper-menu>
+      </paper-scroll-header-panel>
+    <paper-scroll-header-panel  class="fit" main condenses keep-condensed-header>      
+             <paper-toolbar class="main">
+              <paper-icon-button paper-drawer-toggle icon="menu"></paper-icon-button>
+              <span flex class="title">Horario</span>
+              </paper-toolbar>
+              <div class="container" flex layout vertical>
+                   <iron-pages flex selected="{{page}}" attr-for-selected="data-category">
+                        <secction flex data-category="Lunes">
+                            <paper-scroll-header-panel class="fit" condenses keep-condensed-header>   
+                                <iron-list class="fullbleed" >
+                                    <paper-toolbar class="lunes">    
+                                        <paper-icon-button paper-drawer-toggle icon="menu"></paper-icon-button>
+                                            <span flex  class="title">Lunes</span>
+                                    </paper-toolbar>
+                                    <div class="item1">
+                                        <div class="pad">
+                                            <div class="primary">Practica Docente</div>
+                                            <div class="secondary">3:00 - 4:00</div>
+                                            <div class="secondary dim">1</div>
+                                        </div>       
+                                    </div>
+                                    <div class="item2">              
+                                        <div class="pad">
+                                            <div class="primary">Temas Selectos de Traducción II</div>
+                                            <div class="secondary">4:00 - 5:00</div>
+                                            <div class="secondary dim">1</div>
+                                        </div>
+                                    </div>
+                                    <div class="item3">              
+                                        <div class="pad">
+                                            <div class="primary">Diseño de Medios Didacticos</div>
+                                            <div class="secondary">5:00 - 7:00</div>
+                                            <div class="secondary dim">1</div>
+                                        </div>       
+                                    </div>
+                                    <div class="item4">              
+                                        <div class="pad">
+                                            <div class="primary">Redacion Avanzada en Ingles</div>
+                                            <div class="secondary">7:00 - 8:00</div>
+                                            <div class="secondary dim">1</div>
+                                        </div>
+                                    </div>
+                                    <div class="item5">              
+                                        <div class="pad">
+                                            <div class="primary">Seminario de Investigacion</div>
+                                            <div class="secondary">8:00 - 9:00</div>
+                                            <div class="secondary dim">1</div>
+                                        </div>
+                                    </div>
+                                </iron-list>
+                            </paper-scroll-header-panel>
+                        </secction>
+                        <secction data-category="Martes">
+                        <paper-scroll-header-panel class="fit" condenses keep-condensed-header>   
+                                <iron-list class="fullbleed" >
+                                    <paper-toolbar class="lunes">    
+                                        <paper-icon-button paper-drawer-toggle icon="menu"></paper-icon-button>
+                                            <span flex  class="title">Martes</span>
+                                    </paper-toolbar>
+                                    <div class="item1">
+                                        <div class="pad">
+                                            <div class="primary">Redacion Avanzada en Ingles</div>
+                                            <div class="secondary">3:00 - 4:00</div>
+                                            <div class="secondary dim">1</div>
+                                        </div>       
+                                    </div>
+                                    <div class="item2">              
+                                        <div class="pad">
+                                            <div class="primary">Diseño de Medios Didacticos</div>
+                                            <div class="secondary">4:00 - 5:00</div>
+                                            <div class="secondary dim">1</div>
+                                        </div>
+                                    </div>
+                                    <div class="item3">              
+                                        <div class="pad">
+                                            <div class="primary">Ingles Para el Desarrollo de Habilidades</div>
+                                            <div class="secondary">5:00 - 7:00</div>
+                                            <div class="secondary dim">1</div>
+                                        </div>       
+                                    </div>
+                                    <div class="item4">              
+                                        <div class="pad">
+                                            <div class="primary">Diseño Curricular</div>
+                                            <div class="secondary">7:00 - 9:00</div>
+                                            <div class="secondary dim">1</div>
+                                        </div>
+                                    </div>                                    
+                                </iron-list>
+                            </paper-scroll-header-panel>
+                        </secction>
+                        <secction data-category="Miercoles">
+                            <paper-scroll-header-panel class="fit" condenses keep-condensed-header>   
+                                <iron-list class="fullbleed" >
+                                    <paper-toolbar class="lunes">    
+                                        <paper-icon-button paper-drawer-toggle icon="menu"></paper-icon-button>
+                                            <span flex  class="title">Miercoles</span>
+                                    </paper-toolbar>
+                                    <div class="item1">
+                                        <div class="pad">
+                                            <div class="primary">Temas Selectos de Traduccion II</div>
+                                            <div class="secondary">3:00 - 4:00</div>
+                                            <div class="secondary dim">1</div>
+                                        </div>       
+                                    </div>
+                                    <div class="item2">              
+                                        <div class="pad">
+                                            <div class="primary">Diseño de Medios Didacticos</div>
+                                            <div class="secondary">4:00 - 5:00</div>
+                                            <div class="secondary dim">1</div>
+                                        </div>
+                                    </div>
+                                    <div class="item3">              
+                                        <div class="pad">
+                                            <div class="primary">Ingles Para el Desarrollo de Habilidades</div>
+                                            <div class="secondary">5:00 - 7:00</div>
+                                            <div class="secondary dim">1</div>
+                                        </div>       
+                                    </div>
+                                    <div class="item4">              
+                                        <div class="pad">
+                                            <div class="primary">Diseño Curricular</div>
+                                            <div class="secondary">7:00 - 9:00</div>
+                                            <div class="secondary dim">1</div>
+                                        </div>
+                                    </div>                                    
+                                </iron-list>
+                            </paper-scroll-header-panel>
+                        </secction>
+                        <secction data-category="Jueves">
+                            <paper-scroll-header-panel class="fit" condenses keep-condensed-header>   
+                                <iron-list class="fullbleed" >
+                                    <paper-toolbar class="lunes">    
+                                        <paper-icon-button paper-drawer-toggle icon="menu"></paper-icon-button>
+                                            <span flex  class="title">Jueves</span>
+                                    </paper-toolbar>
+                                    <div class="item1">
+                                        <div class="pad">
+                                            <div class="primary">Redaccion Avanzada en Ingles</div>
+                                            <div class="secondary">3:00 - 5:00</div>
+                                            <div class="secondary dim">1</div>
+                                        </div>       
+                                    </div>
+                                    <div class="item2">              
+                                        <div class="pad">
+                                            <div class="primary">Ingles Para el Desarrollo de Habilidades</div>
+                                            <div class="secondary">5:00 - 6:00</div>
+                                            <div class="secondary dim">1</div>
+                                        </div>
+                                    </div>
+                                    <div class="item3">              
+                                        <div class="pad">
+                                            <div class="primary">Temas Selectos de Traduccion II</div>
+                                            <div class="secondary">6:00 - 7:00</div>
+                                            <div class="secondary dim">1</div>
+                                        </div>       
+                                    </div>
+                                    <div class="item4">              
+                                        <div class="pad">
+                                            <div class="primary">Seminario de Investigación</div>
+                                            <div class="secondary">7:00 - 9:00</div>
+                                            <div class="secondary dim">1</div>
+                                        </div>
+                                    </div>                                    
+                                </iron-list>
+                            </paper-scroll-header-panel>
+                        </secction>
+                        <secction data-category="Viernes">
+                            <paper-scroll-header-panel class="fit" condenses keep-condensed-header>   
+                                <iron-list class="fullbleed" >
+                                    <paper-toolbar class="lunes">    
+                                        <paper-icon-button paper-drawer-toggle icon="menu"></paper-icon-button>
+                                            <span flex  class="title">Viernes</span>
+                                    </paper-toolbar>
+                                    <div class="item1">
+                                        <div class="pad">
+                                            <div class="primary">Practica Docente</div>
+                                            <div class="secondary">4:00 - 6:00</div>
+                                            <div class="secondary dim">1</div>
+                                        </div>       
+                                    </div>
+                                    <div class="item2">              
+                                        <div class="pad">
+                                            <div class="primary">Ingles Para el Desarrollo de Habilidades</div>
+                                            <div class="secondary">6:00 - 9:00</div>
+                                            <div class="secondary dim">1</div>
+                                        </div>
+                                    </div>                                                                        
+                                </iron-list>
+                            </paper-scroll-header-panel>
+                        </secction>
+                                   
+                 </iron-pages>
+               </div>       
+    </paper-scroll-header-panel>
+    </paper-drawer-panel>     
+    </template>
+     <script>
+      (function(document) {
+          var app = document.querySelector('#app');
+          app.onDataRouteClick = function() {
+              var drawerPanel = document.querySelector('#paperDrawerPanel');
+              if (drawerPanel.narrow) {
+                  drawerPanel.closeDrawer();
+              }
+          };
+      })(document);
+    </script>
+</body>
+</html>
